@@ -25,12 +25,12 @@ apt-get install -y ipset libipset-dev libipset2
 
 For CentOS 6 you should build ipset from sources:
 ```
+yum install -y libmnl-devel
 cd /usr/src
 wget http://ipset.netfilter.org/ipset-6.24.tar.bz2
 tar -xf ipset-6.24.tar.bz2
 cd ipset-6.24
 ./configure --prefix=/opt/ipset --with-kmod=no
-yum install -y libmnl-devel
 make install
 echo "/opt/ipset/lib" > /etc/ld.so.conf.d/ipset.conf
 ldconfig
