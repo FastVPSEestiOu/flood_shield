@@ -4,6 +4,9 @@
 
 #include "ipset_management.h"
 
+// If we use upstream version from Git we can skip this extern C declaration
+// More details here: http://marc.info/?l=netfilter-devel&m=142670887330383&w=2
+// http://marc.info/?l=netfilter-devel&m=142668453821445&w=2
 extern "C" {
     // #include <libipset/debug.h>             /* D() */
     #include <libipset/data.h>              /* enum ipset_data */

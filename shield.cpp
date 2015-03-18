@@ -189,7 +189,7 @@ int parse_http_request(const u_char* buf, int packet_len, uint32_t client_ip_as_
             if (ban_result == 0) {
                 ban_list[client_ip] = request_per_second;
             } else {
-                printf("Ban failed\n");
+                printf("Ban failed with error: %d\n", ban_result);
             }
 
             // IPSET_UNBLOCK 
