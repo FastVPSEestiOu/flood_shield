@@ -2,7 +2,7 @@
 
  Toolkit for http flood detection and prevention
  License: GPLv2
- Author: Pavel Odintsov
+ Author: Pavel Odintsov pavel.odintsov@gmail.com
  Company: FastVPS Eesti OU @ FastVPS.host
 
 */
