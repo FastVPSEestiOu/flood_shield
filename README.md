@@ -39,7 +39,8 @@ ldconfig
 Build Flood Shield:
 ```
 cd /usr/src
-cd fastnetmon/flood_shield
+git clone https://github.com/FastVPSEestiOu/flood_shield.git
+flood_shield
 ./build_shield.sh
 ```
 
