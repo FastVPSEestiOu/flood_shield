@@ -40,7 +40,7 @@ Build Flood Shield:
 ```
 cd /usr/src
 git clone https://github.com/FastVPSEestiOu/flood_shield.git
-flood_shield
+cd flood_shield
 ./build_shield.sh
 ```
 
