@@ -46,7 +46,10 @@ cd flood_shield
 
 Create ipset and iptables rules:
 ```bash
+# Debian
 ipset --create blacklist iphash --hashsize 4096
+# CentOS 6:
+/opt/ipset/sbin/ipset --create blacklist iphash --hashsize 4096
 iptables -I INPUT -m set --match-set blacklist src -p TCP --destination-port 80 -j DROP
 ```
 
