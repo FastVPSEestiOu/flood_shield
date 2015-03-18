@@ -2,7 +2,7 @@
 
 Please be aware! It's first beta realease of tool!
 
-We sniff and parse all incoming http requests. If any IP made more than XX requests per second (with same method and URI) we will trigger ipset ban immediately. 
+We sniff and parse all incoming http requests. If any IP made more than XX requests per second (with same host, method and URI) we will trigger ipset ban immediately. 
 
 Compatibility: only Linux, Debian 7+, CentOS 6+
 
@@ -55,7 +55,7 @@ Run it:
 ./shield
 ```
 
-By default we will ban any IP which exceed 20 requests per second with same METHOD and URI. If you want to change it, please fix in code and recompile. We sniff only 80 port by default.
+By default we will ban any IP which exceed 20 requests per second with same HOST, METHOD and URI. If you want to change it, please fix in code and recompile. We sniff only 80 port by default.
 
 Thanks:
 - Picohttpparser team for a perfect and fast [parser](https://github.com/h2o/picohttpparser)
