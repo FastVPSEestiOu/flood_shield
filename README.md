@@ -61,5 +61,5 @@ Run it:
 By default we will ban any IP which exceed 20 requests per second with same HOST, METHOD and URI. If you want to change it, please fix in code and recompile. We sniff only 80 port by default.
 
 Thanks:
-- Picohttpparser team for a perfect and fast [parser](https://github.com/h2o/picohttpparser)
+- Kazuho Oku, Tokuhiro Matsuno, Daisuke Murase, Shigeo Mitsunari for a perfect and fast http packet [parser](https://github.com/h2o/picohttpparser)
 - PF_RING team for a nice facility for [capturing packets](http://www.ntop.org/products/pf_ring/)
