@@ -291,7 +291,8 @@ void parse_packet_pf_ring(const struct pfring_pkthdr *packet_header, const u_cha
 
         printf("Payload size %d\n", payload_length);
         printf("Payload dump as char: %.*s\n", payload_length, payload_pointer);
-        print_hex(payload_pointer, payload_length);
+        
+        //print_hex(payload_pointer, payload_length);
     } else {
         //printf("Parser OK\n");
     }
