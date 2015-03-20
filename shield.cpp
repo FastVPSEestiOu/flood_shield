@@ -209,6 +209,14 @@ std::string convert_ip_as_integer_to_string(uint32_t ip_in_host_byte_order) {
     return std::string(str);
 }
 
+void print_hex(const unsigned char* pointer, unsigned int length) {
+    for (int i = 0; i<length; i++) {
+        printf("0x%02x", pointer[i]);
+    }
+
+    printf("\n");
+}
+
 void parse_packet_pf_ring(const struct pfring_pkthdr *packet_header, const u_char *packetptr, const u_char *user_bytes) {
     memset((void*)&packet_header->extended_hdr.parsed_pkt, 0, sizeof(packet_header->extended_hdr.parsed_pkt));
     pfring_parse_pkt((u_char*)packetptr, (struct pfring_pkthdr*)packet_header, 4, 1, 0);
@@ -261,6 +269,7 @@ void parse_packet_pf_ring(const struct pfring_pkthdr *packet_header, const u_cha
 
         printf("Payload size %d\n", payload_length);
         printf("Payload dump as char: %.*s\n", payload_length, payload_pointer);
+        print_hex(payload_pointer, payload_length);
     } else {
         //printf("Parser OK\n");
     }
