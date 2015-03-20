@@ -253,8 +253,30 @@ void parse_packet_pf_ring(const struct pfring_pkthdr *packet_header, const u_cha
         return;
     }
 
-    unsigned int payload_length = packet_header->len - packet_header->extended_hdr.parsed_pkt.offset.payload_offset;
     const u_char* payload_pointer = packetptr + packet_header->extended_hdr.parsed_pkt.offset.payload_offset;
+    unsigned int payload_length = packet_header->len - packet_header->extended_hdr.parsed_pkt.offset.payload_offset;
+
+    /*
+        :[00:23:9C:0D:88:91 -> 68:05:CA:1F:2B:47] [IPv4][185.41.170.48:55411 -> 188.40.35.183:80] [l3_proto=TCP][hash=0][tos=0]
+        [tcp_seq_num=318 0751621] [caplen=60][len=60][parsed_header_len=0][eth_offset=0][l3_offset=14][l4_offset=34][payload_offset=54]
+    */
+
+    unsigned int ethernet_frame_size = 60;
+
+    if (packet_header->len == ethernet_frame_size && packet_header->extended_hdr.parsed_pkt.offset.payload_offset < ethernet_frame_size) {
+        // If we have less than 60 bytes of data we sill padd it with zero bytes
+        for (unsigned int offset = 0; offset < payload_length; offset++) {
+            const u_char* current_symbol = payload_pointer + offset;
+
+            if (current_symbol != 0x00) {
+                // If we found non zero byte here we will process it
+                break;
+            }
+        }
+
+        // We will skip padding
+        return;
+    }
 
     int result = parse_http_request(
         payload_pointer,
