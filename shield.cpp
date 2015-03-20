@@ -235,14 +235,28 @@ void parse_packet_pf_ring(const struct pfring_pkthdr *packet_header, const u_cha
         return;
     } 
 
-    int result = parse_http_request(packetptr + packet_header->extended_hdr.parsed_pkt.offset.payload_offset,
-        packet_header->len,
+    if (packet_header->len <= packet_header->extended_hdr.parsed_pkt.offset.payload_offset) {
+        printf("Something goes wrong! Offset if bigger than total packet length");
+        return;
+    }
+
+    unsigned int payload_length = packet_header->len - packet_header->extended_hdr.parsed_pkt.offset.payload_offset;
+    const u_char* payload_pointer = packetptr + packet_header->extended_hdr.parsed_pkt.offset.payload_offset;
+
+    int result = parse_http_request(
+        payload_pointer,
+        payload_length,
         packet_header->extended_hdr.parsed_pkt.ip_src.v4
-    ); 
-    
+    );
+
     if (result != 0) {
         char print_buffer[512];
         pfring_print_parsed_pkt(print_buffer, 512, (u_char*)packetptr, packet_header);
         printf("Can't parse this packet\n:%s", print_buffer);
+
+        printf("Payload size %d\n", payload_length);
+        printf("Payload dump as char: %.*s\n", payload_length, payload_pointer);
+    } else {
+        //printf("Parser OK\n");
     }
 }
