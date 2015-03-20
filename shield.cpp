@@ -212,6 +212,11 @@ std::string convert_ip_as_integer_to_string(uint32_t ip_in_host_byte_order) {
 void parse_packet_pf_ring(const struct pfring_pkthdr *packet_header, const u_char *packetptr, const u_char *user_bytes) {
     memset((void*)&packet_header->extended_hdr.parsed_pkt, 0, sizeof(packet_header->extended_hdr.parsed_pkt));
     pfring_parse_pkt((u_char*)packetptr, (struct pfring_pkthdr*)packet_header, 4, 1, 0);
+
+    // Drop non tcp traffic
+    if (packet_header->extended_hdr.parsed_pkt.l3_proto != IPPROTO_TCP) {
+        return;
+    }
    
     bool this_packet_part_of_tcp_handshake = extract_bit_value(packet_header->extended_hdr.parsed_pkt.tcp.flags, 2) or // SYN
         extract_bit_value(packet_header->extended_hdr.parsed_pkt.tcp.flags, 1) or // FIN
