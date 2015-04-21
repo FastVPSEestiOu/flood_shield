@@ -13,7 +13,7 @@ std::string hash_key = client_ip + ":" + host_string + ":" + method_string + ":"
 
 Install FastNetMon (it will build and install all required libs):
 ```bash
-wget https://raw.githubusercontent.com/FastVPSEestiOu/fastnetmon/master/fastnetmon_install.pl
+wget https://raw.githubusercontent.com/FastVPSEestiOu/fastnetmon/master/src/fastnetmon_install.pl
 perl fastnetmon_install.pl
 ```
 
